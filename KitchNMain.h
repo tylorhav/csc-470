@@ -25,6 +25,7 @@ class KitchNMain {
   Ingredient getIngredientByName(std::string name);
   void removeIngredient(std::string name);
   void removeRecipe(std::string title);
+  int main();
 
 };
 

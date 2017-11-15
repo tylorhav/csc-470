@@ -100,3 +100,7 @@ void KitchNMain::removeRecipe(string title) {
     cout << title << " does not exist.\n";
   }
 }
+
+int KitchNMain::main() {
+
+}
