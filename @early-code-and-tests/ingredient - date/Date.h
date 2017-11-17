@@ -11,11 +11,11 @@ class Date {
   int month;
   int year;
 
+ public:
   void setDay(int day);
   void setMonth(int month);
   void setYear(int year);
 
- public:
   Date(int day, int month, int year);
   int getDay();
   int getMonth();
