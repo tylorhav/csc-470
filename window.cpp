@@ -41,11 +41,52 @@ void Window::createCommonLabels()
         prepTimeLabel->setText("Prep Time (Min):");
     cookTimeLabel = new QLabel;
         cookTimeLabel->setText("Cook Time (Min):");
+    ingredientNameLabel = new QLabel;
+        ingredientNameLabel->setText("Ingredient Name");
+    expirationDateLabel = new QLabel;
+        expirationDateLabel->setText("Expiration Date");
+}
+
+void Window::createInventoryPopup()
+{
+    inventoryPopupWidget = new QWidget;
+    saveNewInventory = new QPushButton;
+        saveNewInventory->setText("Save");
+    cancelNewInventory = new QPushButton;
+        cancelNewInventory->setText("Cancel");
+    inventoryPopupLayout = new QGridLayout;
+    newInventoryNameInput = new QLineEdit;
+        newInventoryNameInput->setPlaceholderText("Ingredient Name");
+    newInventoryExpirationInput = new QDateEdit;
     
+    //connect up those buttons
+    connect(cancelNewInventory, SIGNAL (released()),this, SLOT (cancelInventoryPopup()));
+    connect(saveNewInventory, SIGNAL (released()),this, SLOT (saveInventoryPopup()));
+        
+    //add to layout
+    inventoryPopupLayout->addWidget(ingredientNameLabel, 0, 0, Qt::AlignCenter);
+    inventoryPopupLayout->addWidget(newInventoryNameInput, 0, 1, Qt::AlignCenter);
+    inventoryPopupLayout->addWidget(expirationDateLabel, 1, 0, Qt::AlignCenter);
+    inventoryPopupLayout->addWidget(newInventoryExpirationInput, 1, 1, Qt::AlignCenter);
+    inventoryPopupLayout->addWidget(saveNewInventory, 2, 0, Qt::AlignCenter);
+    inventoryPopupLayout->addWidget(cancelNewInventory, 2, 1, Qt::AlignCenter);
+    inventoryPopupWidget->setLayout(inventoryPopupLayout);
+    inventoryPopupWidget->setWindowTitle(tr("Add Ingredient to Inventory"));
+    inventoryPopupWidget->show();
+}
+
+void Window::cancelInventoryPopup()
+{
+    inventoryPopupWidget->close();
+}
+
+void Window::saveInventoryPopup()
+{
+    inventoryPopupWidget->close();
 }
 
 void Window::createRecipePopup()
-    {
+{
     recipePopupWidget = new QWidget;
     saveNewRecipe = new QPushButton;
         saveNewRecipe->setText("Save");
@@ -80,19 +121,19 @@ void Window::createRecipePopup()
     recipePopupWidget->setLayout(recipePopupLayout);
     recipePopupWidget->setWindowTitle(tr("Add New Recipe"));
     recipePopupWidget->show();
-    }
+}
 
     
 void Window::cancelCreateRecipePopup()
 {
-    delete recipePopupWidget;
+    recipePopupWidget->close();
 }
 
 void Window::saveCreateRecipePopup()
 {
     //This function needs to pass the information in the popup back to rest of program
     recipeList->addItem(newRecipeTitleInput->text()); //this adds it to the recipe list ONLY
-    delete recipePopupWidget;    
+    recipePopupWidget->close();
 }
     
 
@@ -164,7 +205,8 @@ void Window::createInventoryGroupBox()
 
 //connect buttons to their slots
     connect(removeInventory, SIGNAL (released()),this, SLOT (removeInventoryItem()));
-        
+    connect(addInventory, SIGNAL (released()),this, SLOT (createInventoryPopup()));
+    
     inventoryHButtons->addWidget(addInventory);
     inventoryHButtons->addWidget(editInventory);
     inventoryHButtons->addWidget(removeInventory);

@@ -17,6 +17,7 @@ class QSize;
 class QWidget;
 class QLineEdit;
 class QSpinBox;
+class QDateEdit;
 
 class Window : public QWidget
 {
@@ -33,6 +34,9 @@ private slots:
     void createRecipePopup();
     void cancelCreateRecipePopup();
     void saveCreateRecipePopup();
+    void createInventoryPopup();
+    void cancelInventoryPopup();
+    void saveInventoryPopup();
 
 
 private:
@@ -100,6 +104,17 @@ private:
     QLabel* cuisineTypeLabel;
     QLabel* prepTimeLabel;
     QLabel* cookTimeLabel;
+    QLabel* ingredientNameLabel;
+    QLabel* expirationDateLabel;
+    
+//components of createInventoryPopup
+    QWidget *inventoryPopupWidget;
+    QPushButton *saveNewInventory;
+    QPushButton *cancelNewInventory;
+    QGridLayout *inventoryPopupLayout;
+    QLineEdit *newInventoryNameInput;
+    QDateEdit *newInventoryExpirationInput;
+
 };
 
 #endif
