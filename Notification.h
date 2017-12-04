@@ -5,7 +5,7 @@
 
 #include <string>
 
-class  {
+class Notification {
 
  private:
     std::string title;
