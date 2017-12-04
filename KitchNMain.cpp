@@ -2,6 +2,7 @@
 
 #include "KitchNMain.h"
 #include <iostream>
+#include <stdio.h>
 
 using std::string;
 using std::vector;
@@ -106,8 +107,9 @@ void KitchNMain::removeRecipe(string title) {
   }
 }
 
-int KitchNMain::main() {
+int main() {
 
+  printf("Welcome to KitchNMain\n");
 
   return 0;
 }
