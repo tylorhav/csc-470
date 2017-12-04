@@ -4,9 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 
-using std::string;
-using std::vector;
-using std::cout;
+using namespace std;
 
 void KitchNMain::checkForExpiredIngredients() {
   // awaiting implementation
@@ -109,7 +107,7 @@ void KitchNMain::removeRecipe(string title) {
 
 int main() {
 
-  printf("Welcome to KitchNMain\n");
+  cout << "Welcome to KitchNMain\n" << endl;
 
   return 0;
 }
