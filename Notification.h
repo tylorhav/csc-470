@@ -12,13 +12,13 @@ class  {
     std::string details;
     
  public:
-    std::string Notification::getTitle();
+    std::string getTitle();
     
-    std::string Notification::getDetails();
+    std::string getDetails();
 
-    void Notification::setTitle(std::string title);
+    void setTitle(std::string title);
 
-    void Notification::setDetails(std::string details);
+    void setDetails(std::string details);
   
 };
 
