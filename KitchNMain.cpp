@@ -36,8 +36,8 @@ vector<Recipe> KitchNMain::getRecipesByTitle(string term) {
 vector<Recipe> KitchNMain::getRecipesByIngredient(Ingredient ingredient) {
   vector<Recipe> results;
   for (unsigned int a = 0; a < recipes.size(); a++) {
-    for (int b = 0; b < recipes[a].getIngredients().size(); b++) {
-      if (recipes[a].getIngredients()[b].getName() == ingredient.getName()) {
+    for (unsigned int b = 0; b < recipes[a].getIngredientsList().size(); b++) {
+      if (recipes[a].getIngredientsList()[b].getName() == ingredient.getName()) {
 	results.push_back(recipes[a]);
       }
     }
@@ -55,9 +55,11 @@ vector<Recipe> KitchNMain::getRecipesByCuisineType(string cuisineType) {
   return results;
 }
 
+/*
 vector<Recipe> KitchNMain::getMakeableRecipes() {
   // awaiting implementation
 }
+*/
 
 vector<Ingredient> KitchNMain::getIngredients() {
   return ingredients;
@@ -67,6 +69,9 @@ Ingredient KitchNMain::getIngredientByName(string name) {
   for (unsigned int a = 0; a < ingredients.size(); a++) {
     if (ingredients[a].getName() == name) {
       return ingredients[a];
+    }
+    else {
+      return NULL;
     }
   }
 }
@@ -105,4 +110,6 @@ void KitchNMain::removeRecipe(string title) {
 
 int KitchNMain::main() {
 
+
+  return 0;
 }
