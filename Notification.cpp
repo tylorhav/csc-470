@@ -1,5 +1,8 @@
 //Notification.cpp
 
+#include <string>
+#include "Notification.h"
+
 using std::string;
 
 
@@ -16,6 +19,6 @@ using std::string;
     }
 
     void Notification::setDetails(string details) {
-        this->details = detials;
+        this->details = details;
     }
 
