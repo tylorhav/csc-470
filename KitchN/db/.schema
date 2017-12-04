@@ -1,0 +1,7 @@
+CREATE TABLE shoppingList(items TINYTEXT);
+CREATE TABLE notifications(n_id SMALLINT, title TINYTEXT, details TEXT);
+CREATE TABLE expirationDates(ingredientName TINYTEXT, expDate DATE);
+CREATE TABLE recipes(title TINYTEXT, prepTime SMALLINT, cookTime SMALLINT, cuisineType TINYTEXT);
+CREATE TABLE recipeIngredients(recipe_id SMALLINT, measurement TINYTEXT, name TINYTEXT);
+CREATE TABLE steps(recipe_id SMALLINT, stepNum SMALLINT, details TEXT);
+CREATE TABLE ingredients(name TINYTEXT, quantity SMALLINT);
