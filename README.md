@@ -1,2 +1,2 @@
-# csc-470
+# KitchN
 Repo for CSC 470 Group Project. Fall 17 @ DSU
