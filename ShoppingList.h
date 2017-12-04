@@ -6,18 +6,19 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include "RecipeIngredient.h"
 
-class  {
+class ShoppingList {
 
  private:
   std::vector<RecipeIngredient> items;
   
  public:
-    vector<string> ShoppingList::getItems();
+    std::vector<std::string> getItems();
 
-    void ShoppingList::addItem(string item);
+    void addItem(std::string item);
 
-    void ShoppingList::removeItem(string item);
+    void removeItem(std::string item);
   
 };
 
