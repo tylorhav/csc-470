@@ -32,7 +32,7 @@ class KitchNMain {
   std::vector<Recipe> getRecipesByCuisineType(std::string cuisineType);
   std::vector<Recipe> getMakeableRecipes();
   std::vector<Ingredient> getIngredients();
-  Ingredient getIngredientByName(std::string name);
+  Ingredient* getIngredientByName(std::string name);
   void removeIngredient(std::string name);
   void removeRecipe(std::string title);
   int main();

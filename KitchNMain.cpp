@@ -65,15 +65,13 @@ vector<Ingredient> KitchNMain::getIngredients() {
   return ingredients;
 }
 
-Ingredient KitchNMain::getIngredientByName(string name) {
+Ingredient* KitchNMain::getIngredientByName(string name) {
   for (unsigned int a = 0; a < ingredients.size(); a++) {
     if (ingredients[a].getName() == name) {
-      return ingredients[a];
-    }
-    else {
-      return NULL;
+      return &ingredients[a];
     }
   }
+  return NULL;
 }
 
 void KitchNMain::removeIngredient(string name) {
