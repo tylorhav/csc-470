@@ -4,7 +4,16 @@
 #define KITCHNMAIN_H
 
 #include <vector>
+/*
 #include <Notification.h>
+#include <Recipe.h>
+*/
+#include "ShoppingList.h"
+#include "Ingredient.h"
+#include "Recipe.h"
+#include "Notification.h"
+
+class ShoppingList;
 
 class KitchNMain {
 
