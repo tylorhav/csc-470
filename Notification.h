@@ -8,17 +8,17 @@
 class  {
 
  private:
-    string title;
-    string details;
+    std::string title;
+    std::string details;
     
  public:
-    string Notification::getTitle();
+    std::string Notification::getTitle();
     
-    string Notification::getDetails();
+    std::string Notification::getDetails();
 
-    void Notification::setTitle(string title);
+    void Notification::setTitle(std::string title);
 
-    void Notification::setDetails(string details);
+    void Notification::setDetails(std::string details);
   
 };
 

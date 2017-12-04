@@ -4,6 +4,7 @@
 #define KITCHNMAIN_H
 
 #include <vector>
+#include <Notification.h>
 
 class KitchNMain {
 
