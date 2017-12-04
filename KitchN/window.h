@@ -37,6 +37,9 @@ private slots:
     void createInventoryPopup();
     void cancelInventoryPopup();
     void saveInventoryPopup();
+    void saveShoppingPopup();
+    void cancelShoppingPopup();
+    void createShoppingPopup();
 
 
 private:
@@ -114,6 +117,16 @@ private:
     QGridLayout *inventoryPopupLayout;
     QLineEdit *newInventoryNameInput;
     QDateEdit *newInventoryExpirationInput;
+
+//components of createShoppingPopup
+    QWidget *shoppingPopupWidget;
+    QPushButton *saveNewShopping;
+    QPushButton *cancelNewShopping;
+    QGridLayout *shoppingPopupLayout;
+    QLineEdit *newShoppingNameInput;
+
+
+
 
 };
 

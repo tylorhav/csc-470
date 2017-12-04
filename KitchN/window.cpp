@@ -14,8 +14,8 @@ Window::Window()
 
     
 //    testFillRecipe();
-    testFillInventory();
-    testFillShopping();
+//    testFillInventory();
+//    testFillShopping();
     
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(recipeGroupBox, 0, 0);
@@ -45,6 +45,43 @@ void Window::createCommonLabels()
         ingredientNameLabel->setText("Ingredient Name");
     expirationDateLabel = new QLabel;
         expirationDateLabel->setText("Expiration Date");
+}
+
+void Window::createShoppingPopup()
+{
+    shoppingPopupWidget = new QWidget;
+    saveNewShopping = new QPushButton;
+        saveNewShopping->setText("Save");
+    cancelNewShopping = new QPushButton;
+        cancelNewShopping->setText("Cancel");
+    shoppingPopupLayout = new QGridLayout;
+    newShoppingNameInput = new QLineEdit;
+        newShoppingNameInput->setPlaceholderText("Ingredient Name");
+    
+    //connect up those buttons
+    connect(cancelNewShopping, SIGNAL (released()),this, SLOT (cancelShoppingPopup()));
+    connect(saveNewShopping, SIGNAL (released()),this, SLOT (saveShoppingPopup()));
+        
+    //add to layout
+    shoppingPopupLayout->addWidget(ingredientNameLabel, 0, 0, Qt::AlignCenter);
+    shoppingPopupLayout->addWidget(newShoppingNameInput, 0, 1, Qt::AlignCenter);
+    shoppingPopupLayout->addWidget(saveNewShopping, 1, 0, Qt::AlignCenter);
+    shoppingPopupLayout->addWidget(cancelNewShopping, 1, 1, Qt::AlignCenter);
+    shoppingPopupWidget->setLayout(shoppingPopupLayout);
+    shoppingPopupWidget->setWindowTitle(tr("Add to Shopping List"));
+    shoppingPopupWidget->show();
+}
+
+void Window::cancelShoppingPopup()
+{
+    shoppingPopupWidget->close();
+}
+
+void Window::saveShoppingPopup()
+{
+    ShoppingList::addItem(newShoppingNameInput->text());//adds to database
+    shoppingList->addItem(newShoppingNameInput->text());//adds to UI
+    shoppingPopupWidget->close();
 }
 
 void Window::createInventoryPopup()
@@ -82,6 +119,7 @@ void Window::cancelInventoryPopup()
 
 void Window::saveInventoryPopup()
 {
+    inventoryList->addItem(newInventoryNameInput->text());
     inventoryPopupWidget->close();
 }
 
@@ -241,6 +279,7 @@ void Window::createShoppingGroupBox()
         
 //connect buttons to their slots
     connect(removeShopping, SIGNAL (released()),this, SLOT (removeShoppingItem()));
+    connect(addShopping, SIGNAL (released()),this, SLOT (createShoppingPopup()));
         
     shoppingHButtons->addWidget(addShopping);
     shoppingHButtons->addWidget(editShopping);
@@ -256,26 +295,27 @@ void Window::createShoppingGroupBox()
 
     void Window::removeRecipeItem()
     {
-        //Insert code to pass recipe item name to method that deletes that recipe from user data
+        KitchNMain::removeRecipe(recipeList->currentItem());
        delete (recipeList->currentItem());
     }
     
     void Window::removeInventoryItem()
     {
-        //Insert code to pass recipe item name to method that deletes that recipe from user data
+        KitchNMain::removeIngredient(inventoryList->currentItem());
        delete (inventoryList->currentItem());
     }
     
     void Window::removeShoppingItem()
     {
-        //Insert code to pass recipe item name to method that deletes that recipe from user data
+        ShoppingList::removeItem(shoppingList->currentItem());
        delete (shoppingList->currentItem());
     }
 
     void Window::displayRecipeOnClick()
     {
-// This method will pass the name of the recipe out, and get in the recipe itself for display 
-        (recipeList->currentItem())->setBackground(Qt::green); //this is just proof of concept
+// This method will pass the name of the recipe out, and get in the recipe itself for display
+//Not Yet Implimented
+//        (recipeList->currentItem())->setBackground(Qt::green); //this is just example
     }
     
 
