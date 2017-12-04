@@ -6,12 +6,11 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include "RecipeIngredient.h"
 
 class ShoppingList {
 
  private:
-  std::vector<RecipeIngredient> items;
+  std::vector<std::string> items;
   
  public:
     std::vector<std::string> getItems();
