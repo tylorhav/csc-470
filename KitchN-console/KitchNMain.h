@@ -27,12 +27,12 @@ class KitchNMain {
   void checkForExpiredIngredients();
   void checkNotifications();
   
+  ShoppingList getShoppingList();
   std::vector<Recipe> getRecipes();
   std::vector<Recipe> getRecipesByTitle(std::string term);
   std::vector<Recipe> getRecipesByIngredient(Ingredient ingredient);
   std::vector<Recipe> getRecipesByCuisineType(std::string cuisineType);
   std::vector<Recipe> getMakeableRecipes();
-  
   std::vector<Ingredient> getIngredients();
   Ingredient* getIngredientByName(std::string name);
 
@@ -40,8 +40,26 @@ class KitchNMain {
   void removeIngredient(std::string name);
   void addRecipe(std::string title);
   void removeRecipe(std::string title);
+  
+  void getIngredientsConsoleWrapper();
+  void addIngredientConsoleWrapper();
+  void removeIngredientConsoleWrapper();
+  void getRecipesConsoleWrapper();
+  void getRecipesByTitleConsoleWrapper();
+  void getRecipesByIngredientConsoleWrapper();
+  void getRecipesByCuisineTypeConsoleWrapper();
+  void addRecipeConsoleWrapper();
+  void removeRecipeConsoleWrapper();
+  void getShoppingListConsoleWrapper();
+  void addIngredientToShoppingList();
+  void removeIngredientFromShoppingList();
+  void clearShoppingList();
+
+
   void exitSystem();
+  void clearScreen();
   int displayMenu();
+  int displayRecipe(string title);
 
   int main();
 

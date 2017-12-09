@@ -19,6 +19,10 @@ void KitchNMain::checkNotifications() {
   }
 }
 
+ShoppingList KitchNMain::getShoppingList() {
+  return shoppingList;
+}
+
 vector<Recipe> KitchNMain::getRecipes() {
   return recipes;
 }
@@ -114,10 +118,143 @@ void KitchNMain::removeRecipe(string title) {
   }
 }
 
+void getIngredientsConsoleWrapper() {
+  clearScreen();
+
+  // display list of all ingredients on hand
+  // enter to continue
+}
+
+void addIngredientConsoleWrapper() {
+  clearScreen();
+  // input:
+  //  - name
+  //  - exp date
+  //  - qty
+
+  // instantiate ingredient
+  // add to ingredients vector
+
+  // confirmation
+  // view ingredients list? 
+  //      y - getIngredientsConsoleWrapper() 
+  //      else proceed
+}
+
+void removeIngredientConsoleWrapper() {
+  clearScreen();
+  // display #'d list of ingredients
+  // prompt # to remove
+  // prompt qty  
+  // remove from inventory (assume oldest exp date for simplicity)
+}
+
+void getRecipesConsoleWrapper() {
+  clearScreen();
+  // display #'d list of recipes
+  // prompt # to view
+  //   - 0 back to main
+  //   - !=0 displayRecipe(string title) | getRecipesConsoleWrapper();
+  // 
+}
+
+void getRecipesByTitleConsoleWrapper() {
+  clearScreen();
+  // prompt recipe title
+  // show #'d list of matching recipes
+  // prompt recipe # to display
+  //   - 0 back to main
+  // if != 0, displayRecipe(string title)
+  //          getRecipesByTitleConsoleWrapper();
+  // else displayMenu();
+}
+
+void getRecipesByIngredientConsoleWrapper() {
+  // prompt ingredient name
+  // show #'d list of matching recipes
+  // prompt recipe # to display
+  //   - 0 back to main
+  // if != 0, displayRecipe(string title)
+  //          getRecipesByIngredientConsoleWrapper();
+  // else displayMenu();
+}
+
+void getRecipesByCuisineTypeConsoleWrapper() {
+  clearScreen();
+  // display #'d list of current cuisine types
+  // prompt cuisine type #
+  clearScreen();
+  // show #'d list of matching recipes
+  // prompt recipe # to display
+  //   - 0 back to main
+  // if != 0, displayRecipe(string title)
+  //          getRecipesByCuisineTypeConsoleWrapper();
+  // else displayMenu();
+}
+
+void addRecipeConsoleWrapper() {
+  clearScreen();
+  // prompt recipe title
+  // prompt prep time
+  // prompt cook time
+  // prompt cuisine type
+  // loop prompt ingredients name and quantity
+  // loop prompt steps
+  // instantiate recipe
+  // addRecipe(recipe)
+  // displayRecipe(string title)
+}
+
+void removeRecipeConsoleWrapper() {
+  clearScreen();
+  // display #'d list of all recipes
+  // prompt for recipe # to remove
+  // remove recipe
+  // confirmation
+  // enter to continue
+}
+
+void getShoppingListConsoleWrapper() {
+  clearScreen();
+  // display current shopping list
+  // enter to continue
+}
+
+void addIngredientToShoppingList() {
+  clearScreen();
+  // display #'d list of ingredients
+  // prompt for # of ingredient
+  // add ingredient to shopping list
+  // confirmation
+  // enter to continue
+}
+
+void removeIngredientFromShoppingList() {
+  clearScreen();
+  // display current shopping list (#'d)
+  // prompt for # of item to remove
+  // confirmation
+  // enter to continue
+}
+
+void clearShoppingList() {
+  clearScreen();
+  // display current shopping list
+  // prompt to confirm
+  // empty list
+  // confirmation
+  // enter to continue
+}
+
+
 void exitSystem() {
   cout << "Thank you for using KitchN. Goodbye.\n";
   sleep(3);
   exit(0);
+}
+
+void clearScreen() {
+  if(system("CLS")) system("clear");
 }
 
 int displayMenu() {
@@ -125,7 +262,7 @@ int displayMenu() {
   int menuResponse;
 
   // clear screen
-  if(system("CLS")) system("clear");
+  clearScreen();
 
   // display menu
   cout << endl;
@@ -171,6 +308,11 @@ int displayMenu() {
 
   // return response
   return menuResponse;
+}
+
+void displayRecipe(string title) {
+  // show the recipe
+  // enter to continue
 }
 
 
