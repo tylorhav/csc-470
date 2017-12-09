@@ -7,6 +7,10 @@
 
 using namespace std;
 
+void KitchNMain::clearScreen() {
+  if(system("CLS")) system("clear");
+}
+
 void KitchNMain::checkForExpiredIngredients() {
   // awaiting implementation
 }
@@ -118,14 +122,14 @@ void KitchNMain::removeRecipe(string title) {
   }
 }
 
-void getIngredientsConsoleWrapper() {
+void KitchNMain::getIngredientsConsoleWrapper() {
   clearScreen();
 
   // display list of all ingredients on hand
   // enter to continue
 }
 
-void addIngredientConsoleWrapper() {
+void KitchNMain::addIngredientConsoleWrapper() {
   clearScreen();
   // input:
   //  - name
@@ -141,7 +145,7 @@ void addIngredientConsoleWrapper() {
   //      else proceed
 }
 
-void removeIngredientConsoleWrapper() {
+void KitchNMain::removeIngredientConsoleWrapper() {
   clearScreen();
   // display #'d list of ingredients
   // prompt # to remove
@@ -149,7 +153,7 @@ void removeIngredientConsoleWrapper() {
   // remove from inventory (assume oldest exp date for simplicity)
 }
 
-void getRecipesConsoleWrapper() {
+void KitchNMain::getRecipesConsoleWrapper() {
   clearScreen();
   // display #'d list of recipes
   // prompt # to view
@@ -158,7 +162,7 @@ void getRecipesConsoleWrapper() {
   // 
 }
 
-void getRecipesByTitleConsoleWrapper() {
+void KitchNMain::getRecipesByTitleConsoleWrapper() {
   clearScreen();
   // prompt recipe title
   // show #'d list of matching recipes
@@ -169,7 +173,7 @@ void getRecipesByTitleConsoleWrapper() {
   // else displayMenu();
 }
 
-void getRecipesByIngredientConsoleWrapper() {
+void KitchNMain::getRecipesByIngredientConsoleWrapper() {
   // prompt ingredient name
   // show #'d list of matching recipes
   // prompt recipe # to display
@@ -179,11 +183,11 @@ void getRecipesByIngredientConsoleWrapper() {
   // else displayMenu();
 }
 
-void getRecipesByCuisineTypeConsoleWrapper() {
-  clearScreen();
+void KitchNMain::getRecipesByCuisineTypeConsoleWrapper() {
+  //clearScreen();
   // display #'d list of current cuisine types
   // prompt cuisine type #
-  clearScreen();
+  //clearScreen();
   // show #'d list of matching recipes
   // prompt recipe # to display
   //   - 0 back to main
@@ -192,8 +196,8 @@ void getRecipesByCuisineTypeConsoleWrapper() {
   // else displayMenu();
 }
 
-void addRecipeConsoleWrapper() {
-  clearScreen();
+void KitchNMain::addRecipeConsoleWrapper() {
+ // clearScreen();
   // prompt recipe title
   // prompt prep time
   // prompt cook time
@@ -205,8 +209,8 @@ void addRecipeConsoleWrapper() {
   // displayRecipe(string title)
 }
 
-void removeRecipeConsoleWrapper() {
-  clearScreen();
+void KitchNMain::removeRecipeConsoleWrapper() {
+  //clearScreen();
   // display #'d list of all recipes
   // prompt for recipe # to remove
   // remove recipe
@@ -214,14 +218,14 @@ void removeRecipeConsoleWrapper() {
   // enter to continue
 }
 
-void getShoppingListConsoleWrapper() {
-  clearScreen();
+void KitchNMain::getShoppingListConsoleWrapper() {
+  //clearScreen();
   // display current shopping list
   // enter to continue
 }
 
-void addIngredientToShoppingList() {
-  clearScreen();
+void KitchNMain::addIngredientToShoppingList() {
+  //clearScreen();
   // display #'d list of ingredients
   // prompt for # of ingredient
   // add ingredient to shopping list
@@ -229,16 +233,16 @@ void addIngredientToShoppingList() {
   // enter to continue
 }
 
-void removeIngredientFromShoppingList() {
-  clearScreen();
+void KitchNMain::removeIngredientFromShoppingList() {
+  //clearScreen();
   // display current shopping list (#'d)
   // prompt for # of item to remove
   // confirmation
   // enter to continue
 }
 
-void clearShoppingList() {
-  clearScreen();
+void KitchNMain::clearShoppingList() {
+  //clearScreen();
   // display current shopping list
   // prompt to confirm
   // empty list
@@ -253,16 +257,14 @@ void exitSystem() {
   exit(0);
 }
 
-void clearScreen() {
-  if(system("CLS")) system("clear");
-}
+
 
 int displayMenu() {
 
   int menuResponse;
 
   // clear screen
-  clearScreen();
+  //clearScreen();
 
   // display menu
   cout << endl;
@@ -310,10 +312,11 @@ int displayMenu() {
   return menuResponse;
 }
 
-void displayRecipe(string title) {
+void KitchNMain::displayRecipe(string title) {
   // show the recipe
   // enter to continue
 }
+
 
 
 int main() {

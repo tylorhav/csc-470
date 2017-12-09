@@ -36,9 +36,9 @@ class KitchNMain {
   std::vector<Ingredient> getIngredients();
   Ingredient* getIngredientByName(std::string name);
 
-  void addIngredient(string name);
+  void addIngredient(Ingredient ingredient);
   void removeIngredient(std::string name);
-  void addRecipe(std::string title);
+  void addRecipe(Recipe recipe);
   void removeRecipe(std::string title);
   
   void getIngredientsConsoleWrapper();
@@ -59,7 +59,7 @@ class KitchNMain {
   void exitSystem();
   void clearScreen();
   int displayMenu();
-  int displayRecipe(string title);
+  void displayRecipe(std::string title);
 
   int main();
 
