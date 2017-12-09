@@ -10,6 +10,5 @@
 #include "Recipe.h"
 #include "RecipeIngredient.h"
 #include "ShoppingList.h"
-#include "window.h"
 
 #endif
