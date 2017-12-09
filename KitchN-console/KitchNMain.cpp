@@ -107,9 +107,30 @@ void KitchNMain::removeRecipe(string title) {
   }
 }
 
+int displayMenu() {
+  // clear screen
+  // display menu
+  // collect input #
+  // return response
+  cout << "display menu!\n";
+}
+
+
 int main() {
 
   printf("Welcome to KitchNMain\n");
+
+  int menuResponse;
+
+  do
+  {
+    // switch case for menuResponse
+    // displayMenu();
+  } while (menuResponse != 0);
+
+  menuResponse = displayMenu();
+
+
 
   return 0;
 }
