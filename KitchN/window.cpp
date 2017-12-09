@@ -2,8 +2,9 @@
 
 #include <QtCore>
 #include <QtGui>
+#include <string>
 
-#include "window.h"
+#include "Includes.h"
 
 Window::Window()
 {
@@ -79,7 +80,8 @@ void Window::cancelShoppingPopup()
 
 void Window::saveShoppingPopup()
 {
-    ShoppingList::addItem(newShoppingNameInput->text());//adds to database
+    std::string temp = (newShoppingNameInput->text()).toUtf8().constData();
+    ShoppingList::addItem(temp);//adds to database
     shoppingList->addItem(newShoppingNameInput->text());//adds to UI
     shoppingPopupWidget->close();
 }
@@ -295,19 +297,19 @@ void Window::createShoppingGroupBox()
 
     void Window::removeRecipeItem()
     {
-        KitchNMain::removeRecipe(recipeList->currentItem());
+//        KitchNMain::removeRecipe(recipeList->currentItem());
        delete (recipeList->currentItem());
     }
     
     void Window::removeInventoryItem()
     {
-        KitchNMain::removeIngredient(inventoryList->currentItem());
+//       KitchNMain::removeIngredient(inventoryList->currentItem());
        delete (inventoryList->currentItem());
     }
     
     void Window::removeShoppingItem()
     {
-        ShoppingList::removeItem(shoppingList->currentItem());
+//        ShoppingList::removeItem(shoppingList->currentItem());
        delete (shoppingList->currentItem());
     }
 
