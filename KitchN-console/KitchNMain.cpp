@@ -1,10 +1,12 @@
 // KitchNMain.cpp
 
-#include "KitchNMain.h"
+#include "Includes.h"
 #include <iostream>
 #include <stdio.h>
 
-using namespace std;
+using std::string;
+using std::vector;
+using std::cout;
 
 void KitchNMain::checkForExpiredIngredients() {
   // awaiting implementation
@@ -107,7 +109,7 @@ void KitchNMain::removeRecipe(string title) {
 
 int main() {
 
-  cout << "Welcome to KitchNMain\n" << endl;
+  printf("Welcome to KitchNMain\n");
 
   return 0;
 }
