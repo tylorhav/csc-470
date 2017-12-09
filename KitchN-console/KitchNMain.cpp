@@ -74,6 +74,10 @@ Ingredient* KitchNMain::getIngredientByName(string name) {
   return NULL;
 }
 
+void KitchNMain::addIngredient(Ingredient ingredient) {
+  
+}
+
 void KitchNMain::removeIngredient(string name) {
   bool removed = false;
   for (unsigned int a = 0; a < ingredients.size(); a++) {
@@ -88,6 +92,10 @@ void KitchNMain::removeIngredient(string name) {
   else {
     cout << name << " does not exist.\n";
   }
+}
+
+void KitchNMain::addRecipe(Recipe recipe) {
+
 }
 
 void KitchNMain::removeRecipe(string title) {
@@ -182,9 +190,9 @@ int main() {
 
     switch (menuResponse) {
 
-      case 1: // printInventory()
+      case 1: // getIngredientsConsoleWrapper()
               break;
-      case 2: // addIngredientToInventory()
+      case 2: // addIngredientConsoleWrapper()
               break;
       case 3: // removeIngredientFromInventory()
               break;
