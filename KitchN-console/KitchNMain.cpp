@@ -3,10 +3,9 @@
 #include "Includes.h"
 #include <iostream>
 #include <stdio.h>
+#include <unistd.h>
 
-using std::string;
-using std::vector;
-using std::cout;
+using namespace std;
 
 void KitchNMain::checkForExpiredIngredients() {
   // awaiting implementation
@@ -107,12 +106,63 @@ void KitchNMain::removeRecipe(string title) {
   }
 }
 
+void exitSystem() {
+  cout << "Thank you for using KitchN. Goodbye.\n";
+  sleep(3);
+  exit(0);
+}
+
 int displayMenu() {
+
+  int menuResponse;
+
   // clear screen
+  if(system("CLS")) system("clear");
+
   // display menu
+  cout << endl;
+  cout << "----------------------------+ Welcome to KitchN! +---------------------------" << endl;
+  cout << endl;
+  
+  // checkNotifications()
+
+  cout << "  You currently have X items on your shopping list" << endl;
+  cout << "  You currently have X items in your kitch inventory" << endl;
+  cout << endl;
+  cout << endl;
+  cout << "  --+ MAIN MENU +--" << endl;
+  cout << endl;
+  cout << "  - Kitchen Inventory" << endl;
+  cout << "  1) View all on-hand ingredients" << endl;
+  cout << "  2) Add ingredient to inventory" << endl;
+  cout << "  3) Remove ingredient from inventory" << endl;
+  cout << endl;
+  cout << "  - Recipes" << endl;
+  cout << "  4) View all recipes" << endl;
+  cout << "  5) Search by title" << endl;
+  cout << "  6) Search by ingredient name" << endl;
+  cout << "  7) Search by cuisine type" << endl;
+  cout << "  8) Add recipe" << endl;
+  cout << "  9) Remove recipe" << endl;
+  cout << endl;
+  cout << "  - Shopping List" << endl;
+  cout << "  10) View shopping list" << endl;
+  cout << "  11) Add ingredient to shopping list" << endl;
+  cout << "  12) Remove ingredient from shopping list" << endl;
+  cout << "  13) Clear shopping list" << endl;
+  cout << endl;
+  cout << "  0) Exit" << endl;
+  cout << endl;
+  cout << "------------------------------------------------------------------------------" << endl;
+  cout << "Please enter your selection: ";
+  
+
+
   // collect input #
+  cin >> menuResponse;
+
   // return response
-  cout << "display menu!\n";
+  return menuResponse;
 }
 
 
@@ -120,15 +170,59 @@ int main() {
 
   printf("Welcome to KitchNMain\n");
 
-  int menuResponse;
-
-  do
-  {
-    // switch case for menuResponse
-    // displayMenu();
-  } while (menuResponse != 0);
+  int menuResponse = 0;
+  char temp;
 
   menuResponse = displayMenu();
+
+  while (menuResponse != 0) {
+    // switch case for menuResponse
+    
+    cout << "You entered " << menuResponse << endl;
+
+    switch (menuResponse) {
+
+      case 1: // printInventory()
+              break;
+      case 2: // addIngredientToInventory()
+              break;
+      case 3: // removeIngredientFromInventory()
+              break;
+      case 4: // printRecipes()
+              break;
+      case 5: // printRecipesByTitle()
+              break;
+      case 6: // printRecipesByIngredient()
+              break;
+      case 7: // printRecipesByCuisineType()
+              break;
+      case 8: // addNewRecipe()
+              break;
+      case 9: // removeRecipe()
+              break;
+      case 10: // printShoppingList()
+              break;              
+      case 11: // addToShoppingList()
+              break;
+      case 12: // removeFromShoppingList()
+              break;
+      case 13: // clearShoppingList()
+              break;
+      case 0: exitSystem();
+              break;
+      
+
+    }
+
+    cin >> temp;
+
+    menuResponse = displayMenu();
+  
+
+  }
+
+  cout << "exited loop with menuResponse = " << menuResponse << endl;
+  exitSystem();
 
 
 
