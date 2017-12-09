@@ -26,15 +26,23 @@ class KitchNMain {
  public:
   void checkForExpiredIngredients();
   void checkNotifications();
+  
   std::vector<Recipe> getRecipes();
   std::vector<Recipe> getRecipesByTitle(std::string term);
   std::vector<Recipe> getRecipesByIngredient(Ingredient ingredient);
   std::vector<Recipe> getRecipesByCuisineType(std::string cuisineType);
   std::vector<Recipe> getMakeableRecipes();
+  
   std::vector<Ingredient> getIngredients();
   Ingredient* getIngredientByName(std::string name);
+
+  void addIngredient(string name);
   void removeIngredient(std::string name);
+  void addRecipe(std::string title);
   void removeRecipe(std::string title);
+  void exitSystem();
+  int displayMenu();
+
   int main();
 
 };
