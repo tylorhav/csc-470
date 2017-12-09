@@ -53,6 +53,7 @@ class KitchNMain {
   void getShoppingListConsoleWrapper();
   void addIngredientToShoppingList();
   void removeIngredientFromShoppingList();
+  void clearShoppingListConsoleWrapper();
   void clearShoppingList();
 
 

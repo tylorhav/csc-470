@@ -124,13 +124,19 @@ void KitchNMain::removeRecipe(string title) {
 
 void KitchNMain::getIngredientsConsoleWrapper() {
   clearScreen();
-
+  cout << "in getIngredientsConsoleWrapper()" << endl;
+  
   // display list of all ingredients on hand
+  std::vector<Ingredient> results = getIngredients();
+
   // enter to continue
+  char temp;
+  cin >> temp;
 }
 
 void KitchNMain::addIngredientConsoleWrapper() {
   clearScreen();
+  cout << "in addIngredientConsoleWrapper()" << endl;
   // input:
   //  - name
   //  - exp date
@@ -147,6 +153,7 @@ void KitchNMain::addIngredientConsoleWrapper() {
 
 void KitchNMain::removeIngredientConsoleWrapper() {
   clearScreen();
+  cout << "in removeIngredientConsoleWrapper()" << endl;
   // display #'d list of ingredients
   // prompt # to remove
   // prompt qty  
@@ -155,6 +162,7 @@ void KitchNMain::removeIngredientConsoleWrapper() {
 
 void KitchNMain::getRecipesConsoleWrapper() {
   clearScreen();
+  cout << "in getRecipesConsoleWrapper()" << endl;
   // display #'d list of recipes
   // prompt # to view
   //   - 0 back to main
@@ -164,6 +172,7 @@ void KitchNMain::getRecipesConsoleWrapper() {
 
 void KitchNMain::getRecipesByTitleConsoleWrapper() {
   clearScreen();
+  cout << "in getRecipesByTitleConsoleWrapper()" << endl;
   // prompt recipe title
   // show #'d list of matching recipes
   // prompt recipe # to display
@@ -174,6 +183,8 @@ void KitchNMain::getRecipesByTitleConsoleWrapper() {
 }
 
 void KitchNMain::getRecipesByIngredientConsoleWrapper() {
+  clearScreen();
+  cout << "in getRecipesByIngredientConsoleWrapper()" << endl;
   // prompt ingredient name
   // show #'d list of matching recipes
   // prompt recipe # to display
@@ -184,6 +195,8 @@ void KitchNMain::getRecipesByIngredientConsoleWrapper() {
 }
 
 void KitchNMain::getRecipesByCuisineTypeConsoleWrapper() {
+  clearScreen();
+  cout << "in getRecipesByCuisineTypeConsoleWrapper()" << endl;
   //clearScreen();
   // display #'d list of current cuisine types
   // prompt cuisine type #
@@ -197,7 +210,8 @@ void KitchNMain::getRecipesByCuisineTypeConsoleWrapper() {
 }
 
 void KitchNMain::addRecipeConsoleWrapper() {
- // clearScreen();
+  clearScreen();
+  cout << "in addRecipeConsoleWrapper()" << endl;
   // prompt recipe title
   // prompt prep time
   // prompt cook time
@@ -210,7 +224,8 @@ void KitchNMain::addRecipeConsoleWrapper() {
 }
 
 void KitchNMain::removeRecipeConsoleWrapper() {
-  //clearScreen();
+  clearScreen();
+  cout << "in removeRecipeConsoleWrapper()" << endl;
   // display #'d list of all recipes
   // prompt for recipe # to remove
   // remove recipe
@@ -219,13 +234,15 @@ void KitchNMain::removeRecipeConsoleWrapper() {
 }
 
 void KitchNMain::getShoppingListConsoleWrapper() {
-  //clearScreen();
+  clearScreen();
+  cout << "in getShoppingListConsoleWrapper()" << endl;
   // display current shopping list
   // enter to continue
 }
 
 void KitchNMain::addIngredientToShoppingList() {
-  //clearScreen();
+  clearScreen();
+  cout << "in addIngredientToShoppingList()" << endl;
   // display #'d list of ingredients
   // prompt for # of ingredient
   // add ingredient to shopping list
@@ -234,24 +251,29 @@ void KitchNMain::addIngredientToShoppingList() {
 }
 
 void KitchNMain::removeIngredientFromShoppingList() {
-  //clearScreen();
+  clearScreen();
+  cout << "in removeIngredientFromShoppingList()" << endl;
   // display current shopping list (#'d)
   // prompt for # of item to remove
   // confirmation
   // enter to continue
 }
 
-void KitchNMain::clearShoppingList() {
-  //clearScreen();
+void KitchNMain::clearShoppingListConsoleWrapper() {
+  clearScreen();
+  cout << "in clearShoppingList()" << endl;
   // display current shopping list
   // prompt to confirm
-  // empty list
+  // clearShoppingList();
   // confirmation
   // enter to continue
 }
 
+void KitchNMain::clearShoppingList() {
+  // empty shopping list
+}
 
-void exitSystem() {
+void KitchNMain::exitSystem() {
   cout << "Thank you for using KitchN. Goodbye.\n";
   sleep(3);
   exit(0);
@@ -259,12 +281,12 @@ void exitSystem() {
 
 
 
-int displayMenu() {
+int KitchNMain::displayMenu() {
 
   int menuResponse;
 
   // clear screen
-  //clearScreen();
+  clearScreen();
 
   // display menu
   cout << endl;
@@ -323,10 +345,12 @@ int main() {
 
   printf("Welcome to KitchNMain\n");
 
+  KitchNMain kmain;
+
   int menuResponse = 0;
   char temp;
 
-  menuResponse = displayMenu();
+  menuResponse = kmain.displayMenu();
 
   while (menuResponse != 0) {
     // switch case for menuResponse
@@ -335,47 +359,47 @@ int main() {
 
     switch (menuResponse) {
 
-      case 1: // getIngredientsConsoleWrapper()
+      case 1: kmain.getIngredientsConsoleWrapper();
               break;
-      case 2: // addIngredientConsoleWrapper()
+      case 2: kmain.addIngredientConsoleWrapper();
               break;
-      case 3: // removeIngredientFromInventory()
+      case 3: kmain.removeIngredientConsoleWrapper();
               break;
-      case 4: // printRecipes()
+      case 4: kmain.getRecipesConsoleWrapper();
               break;
-      case 5: // printRecipesByTitle()
+      case 5: kmain.getRecipesByTitleConsoleWrapper();
               break;
-      case 6: // printRecipesByIngredient()
+      case 6: kmain.getRecipesByIngredientConsoleWrapper();
               break;
-      case 7: // printRecipesByCuisineType()
+      case 7: kmain.getRecipesByCuisineTypeConsoleWrapper();
               break;
-      case 8: // addNewRecipe()
+      case 8: kmain.addRecipeConsoleWrapper();
               break;
-      case 9: // removeRecipe()
+      case 9: kmain.removeRecipeConsoleWrapper();
               break;
-      case 10: // printShoppingList()
+      case 10: kmain.getShoppingListConsoleWrapper();
               break;              
-      case 11: // addToShoppingList()
+      case 11: kmain.addIngredientToShoppingList();
               break;
-      case 12: // removeFromShoppingList()
+      case 12: kmain.removeIngredientFromShoppingList();
               break;
-      case 13: // clearShoppingList()
+      case 13: kmain.clearShoppingListConsoleWrapper();
               break;
-      case 0: exitSystem();
+      case 0: kmain.exitSystem();
               break;
       
 
     }
 
-    cin >> temp;
+    //cin >> temp;
 
-    menuResponse = displayMenu();
+    menuResponse = kmain.displayMenu();
   
 
   }
 
   cout << "exited loop with menuResponse = " << menuResponse << endl;
-  exitSystem();
+  kmain.exitSystem();
 
 
 
