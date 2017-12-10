@@ -7,44 +7,6 @@
 
 using namespace std;
 
-void KitchNMain::loadSampleData() {
-
-  cout << "loading sample data, please wait..." << endl;
-
-  // Recipes
-  string title;
-  int prepTime;
-  int cookTime;
-  string cuisineType;
-  vector<RecipeIngredient> myIngredients;
-  vector<string> mySteps;
-
-
-  title = "Poppy Seed Chicken Salad";
-  prepTime = 5;
-  cookTime = 0;
-  cuisineType = "Salad";
-  myIngredients.emplace_back("2 cups", "Chicken Salad");
-  myIngredients.emplace_back("1/4 cup", "Poppy Seed Salad Dressing");
-  myIngredients.emplace_back("1/2 cup - roasted","Pecans");
-  myIngredients.emplace_back("1/2 cup - halved","Grapes");
-  myIngredients.emplace_back("1 package","pita chips");
-  mySteps.push_back("Combine first 4 ingredients in a bowl.");
-  mySteps.push_back("Cover and chill until ready to serve.");
-  mySteps.push_back("Serve with crackers or pita chips.");
-  //recipes.emplace_back(title, prepTime, cookTime, myIngredients, mySteps, cuisineType);
-  Recipe* rec = new Recipe(title, prepTime, cookTime, myIngredients, mySteps, cuisineType);
-  addRecipe(rec);
-
-  // Ingredients
-  string name;
-  string expDate;
-
-
-  // Shopping List
-
-}
-
 void KitchNMain::clearScreen() {
   if(system("CLS")) system("clear");
 }
@@ -72,7 +34,18 @@ vector<Recipe> KitchNMain::getRecipes() {
 vector<Recipe> KitchNMain::getRecipesByTitle(string term) {
   vector<Recipe> results;
   for (unsigned int a = 0; a < recipes.size(); a++) {
-    if (recipes[a].getTitle().find(term) != std::string::npos) {
+    string title = recipes[a].getTitle();
+    for(auto& ch: title) {
+        ch = toupper(ch);
+    }
+
+    for(auto& ch: term) {
+        ch = toupper(ch);
+    }
+
+    
+    //if (recipes[a].getTitle().find(term) != std::string::npos) {
+    if (title.find(term) != std::string::npos) {
       results.push_back(recipes[a]);
     }
   }
@@ -121,22 +94,7 @@ Ingredient* KitchNMain::getIngredientByName(string name) {
 }
 
 void KitchNMain::addIngredient(Ingredient ingredient) {
-  string name;
-
-  cout << "Add Ingredient to Inventory" << endl;
-  cout << endl;
-  cout << "Name: ";
-  getline(cin, name);
-
-  cout << "You entered " << name << endl;
-
-  cout << "0->Enter to exit";
-  char temp;
-  cin >> temp;
-
-  //for (auto &rec : results) {
-
-  //}
+  
 }
 
 void KitchNMain::removeIngredient(string name) {
@@ -177,12 +135,17 @@ void KitchNMain::removeRecipe(string title) {
 
 void KitchNMain::getIngredientsConsoleWrapper() {
   clearScreen();
-  cout << "in getIngredientsConsoleWrapper()" << endl;
-  
+  cout << "Kitchen Inventory:" << endl;
   // display list of all ingredients on hand
+  int ctr = 1;
   std::vector<Ingredient> results = getIngredients();
+  for (auto &ing : results) {
+    cout << ctr << ") " << ing.getName() << endl;
+    ctr++;
+  }
 
   // enter to continue
+  cout << "0->Enter to continue. ";
   char temp;
   cin >> temp;
 }
@@ -190,27 +153,88 @@ void KitchNMain::getIngredientsConsoleWrapper() {
 void KitchNMain::addIngredientConsoleWrapper() {
   clearScreen();
   cout << "in addIngredientConsoleWrapper()" << endl;
+  
   // input:
   //  - name
-  //  - exp date
   //  - qty
+  string name;
+  int month, day, year, qty;
+  cout << "Add Ingredient to Inventory" << endl;
+  cout << endl;
+  cout << "Name: ";
+  cin.ignore();
+  getline(cin, name);
+  cout << endl;
+  cout << "Quantity: ";
+  cin >> qty;
 
-  // instantiate ingredient
-  // add to ingredients vector
+  // do we already have one or more of this ingredient on-hand?
+  bool exists = false;
+  int totalqty;
+  for (auto &ing : ingredients) {
+    if (ing.getName() == name) {
+      exists = true;
+      ing.setQuantity(ing.getQuantity() + qty);
+      totalqty = ing.getQuantity();
+      break;
+    }
+  }
 
-  // confirmation
-  // view ingredients list? 
-  //      y - getIngredientsConsoleWrapper() 
-  //      else proceed
+  if (exists) {
+    //  confirmation
+    cout << name << " already exists in inventory." << endl;
+    cout << "Added " << qty << " " << name << "(s) to inventory." << endl;
+    cout << "Total quantity is now " << totalqty << endl; 
+  } else {
+    //    add Ingredient to ingredients vector
+    ingredients.emplace_back(name, qty);
+    cout << "Added " << qty << " " << name << "(s) to inventory." << endl;
+
+  }
+
+  char response;
+  cout << "Add another ingredient? (Y/n): ";
+  cin >> response;
+  response = char(toupper(response));
+
+  if (response == 'Y') {
+    addIngredientConsoleWrapper();
+  }
 }
 
 void KitchNMain::removeIngredientConsoleWrapper() {
   clearScreen();
-  cout << "in removeIngredientConsoleWrapper()" << endl;
+  cout << "Remove Ingredient From Inventory" << endl;
+  cout << endl;
+
+  cout << "0) Back" << endl;
+  
   // display #'d list of ingredients
+  int ctr = 1;
+  for (auto &ing : ingredients) {
+    cout << ctr << ") " << ing.getName() << endl;
+    ctr++;
+  }
+
   // prompt # to remove
-  // prompt qty  
-  // remove from inventory (assume oldest exp date for simplicity)
+  int numToRemove;
+  cout << "Enter number of ingredient to remove: ";
+  cin >> numToRemove;
+
+  if (numToRemove != 0) {
+    string name = ingredients.at(numToRemove - 1).getName();
+    ingredients.erase(ingredients.begin() + (numToRemove - 1));
+    cout << "Removed " << name << " from kitchen inventory. " << endl;
+  }
+
+  char response;
+  cout << "Remove another ingredient? (Y/n): ";
+  cin >> response;
+  response = char(toupper(response));
+
+  if (response == 'Y') {
+    removeIngredientConsoleWrapper();
+  }
 }
 
 void KitchNMain::getRecipesConsoleWrapper() {
@@ -234,7 +258,7 @@ void KitchNMain::getRecipesConsoleWrapper() {
   // prompt # to view
   cout << "Selection: ";
   cin >> selection;
-  if (selection > 0) {
+  if (selection != 0) {
     // display recipe
     displayRecipe(results.at(selection - 1).getTitle());
     getRecipesConsoleWrapper();
@@ -245,8 +269,41 @@ void KitchNMain::getRecipesByTitleConsoleWrapper() {
   clearScreen();
 
   string searchTitle;
-  int selection;
-  int ctr = 1;
+  cout << "Enter title of recipe to search for: ";
+  cin.ignore();
+  getline(cin, searchTitle);
+
+  vector<Recipe> results = getRecipesByTitle(searchTitle);
+
+  if (results.size() == 0) {
+    cout << "No results matching '" << searchTitle << "'!" << endl;
+  }
+  else {
+
+    cout << "0) Back" << endl;
+    int ctr = 1;
+    for (auto &rec : results) {
+      cout << ctr << ") " << rec.getTitle() << endl;
+      ctr++;
+    }
+
+    int numToDisplay;
+    cout << "Select a recipe #: ";
+    cin >> numToDisplay;
+
+    if (numToDisplay != 0) {
+      displayRecipe(results.at(numToDisplay - 1).getTitle());
+    }
+  }
+  
+  char response;
+  cout << "Search for another recipe? (Y/n): ";
+  cin >> response;
+  response = char(toupper(response));
+
+  if (response == 'Y') {
+    getRecipesByTitleConsoleWrapper();
+  }
 
   // prompt recipe title
   // show #'d list of matching recipes
@@ -310,28 +367,90 @@ void KitchNMain::removeRecipeConsoleWrapper() {
 
 void KitchNMain::getShoppingListConsoleWrapper() {
   clearScreen();
-  cout << "in getShoppingListConsoleWrapper()" << endl;
+  cout << "Shopping List" << endl;
+
   // display current shopping list
+  for (auto &itemName : shoppingList.getItems()) {
+    cout << itemName << endl;
+  }
+  
+  cout << endl;
+  cout << "0->Enter to continue. ";
+
+  char temp;
+  cin >> temp;
   // enter to continue
 }
 
 void KitchNMain::addIngredientToShoppingList() {
   clearScreen();
-  cout << "in addIngredientToShoppingList()" << endl;
-  // display #'d list of ingredients
-  // prompt for # of ingredient
-  // add ingredient to shopping list
-  // confirmation
-  // enter to continue
+  string itemName;
+
+  cout << "Add Ingredient to Shopping List" << endl;
+  cout << endl;
+
+  // prompt for item name
+  cout << "Name of item to add: ";
+  cin.ignore();
+  getline(cin, itemName);
+
+  // check if item is already on shopping list
+  bool exists = false;
+  for (auto &item : shoppingList.getItems()) {
+    if (item == itemName) {
+      exists = true;
+    }
+  }
+
+  if (!exists) {
+    shoppingList.addItem(itemName); // if not on list, add it
+  }
+  else {
+    cout << itemName << " is already on your shopping list!" << endl;
+  }
+
+  char response;
+  cout << "Add another item? (Y/n): ";
+  cin >> response;
+  response = char(toupper(response));
+
+  if (response == 'Y') {
+    addIngredientToShoppingList();
+  }
 }
 
 void KitchNMain::removeIngredientFromShoppingList() {
   clearScreen();
-  cout << "in removeIngredientFromShoppingList()" << endl;
+  cout << "Remove Ingredient From Shopping List" << endl;
+  cout << endl;
+
   // display current shopping list (#'d)
+  cout << "0) Back" << endl;
+  int ctr = 1;
+  for (auto &item : shoppingList.getItems()) {
+    cout << ctr << ") " << item << endl;
+    ctr++; 
+  }
+
   // prompt for # of item to remove
-  // confirmation
-  // enter to continue
+  int numToRemove;
+  cout << "Enter # of item to remove: ";
+  cin >> numToRemove;
+
+  if (numToRemove != 0) {
+    string name = shoppingList.getItems().at(numToRemove - 1);
+    shoppingList.removeItem(name);
+    cout << "Removed " << name << " from shopping list." << endl;
+  }
+  
+  char response;
+  cout << "Remove another item? (Y/n): ";
+  cin >> response;
+  response = char(toupper(response));
+
+  if (response == 'Y') {
+    removeIngredientFromShoppingList();
+  } 
 }
 
 void KitchNMain::clearShoppingListConsoleWrapper() {
@@ -370,8 +489,8 @@ int KitchNMain::displayMenu() {
   
   // checkNotifications()
 
-  cout << "  You currently have X items on your shopping list" << endl;
-  cout << "  You currently have X items in your kitch inventory" << endl;
+  cout << "  You currently have " << shoppingList.getItems().size() << " items on your shopping list" << endl;
+  cout << "  You currently have " << ingredients.size() << " items in your kitchen inventory" << endl;
   cout << endl;
   cout << endl;
   cout << "  --+ MAIN MENU +--" << endl;
@@ -413,10 +532,30 @@ void KitchNMain::displayRecipe(string title) {
   clearScreen();
 
   // show the recipe
-  cout << "Recipe Selected: " << title << endl;
-  
-  // enter to continue
-  cout << "0->Enter to exit.";
+  for (auto &rec : getRecipes()) {
+    if (rec.getTitle() == title) {
+      cout << rec.getTitle() << endl;
+      cout << "----------------------------------------------------" << endl;
+      cout << "Prep Time:   " << rec.getPrepTime() << " minutes" << endl;
+      cout << "Cook Time:   " << rec.getCookTime() << " minutes" << endl;
+      cout << "Recipe Type: " << rec.getCuisineType() << endl;
+      cout << endl;
+      cout << "Ingredients: " << endl;
+      for (auto &recIng : rec.getIngredientsList()) {
+        cout << recIng.getMeasurement() << " " << recIng.getName() << endl;
+      }
+      cout << endl;
+      cout << "Steps:" << endl;
+      int ctr = 1;
+      for (auto &step : rec.getSteps()) {
+        cout << ctr << ". " << step << endl;
+        ctr++;
+      }
+      break;
+    }
+  }
+  cout << endl;
+  cout << "0->Enter to continue. ";
   char temp;
   cin >> temp;
 }
