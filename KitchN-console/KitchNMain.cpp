@@ -400,11 +400,36 @@ void KitchNMain::addIngredientToShoppingList() {
 
 void KitchNMain::removeIngredientFromShoppingList() {
   clearScreen();
-  cout << "in removeIngredientFromShoppingList()" << endl;
+  cout << "Remove Ingredient From Shopping List" << endl;
+  cout << endl;
+
   // display current shopping list (#'d)
+  cout << "0) Back" << endl;
+  int ctr = 1;
+  for (auto &item : shoppingList.getItems()) {
+    cout << ctr << ") " << item << endl;
+    ctr++; 
+  }
+
   // prompt for # of item to remove
-  // confirmation
-  // enter to continue
+  int numToRemove;
+  cout << "Enter # of item to remove: ";
+  cin >> numToRemove;
+
+  if (numToRemove > 0) {
+    string name = shoppingList.getItems().at(numToRemove - 1);
+    shoppingList.removeItem(name);
+    cout << "Removed " << name << " from shopping list." << endl;
+  }
+  
+  char response;
+  cout << "Remove another item? (Y/n): ";
+  cin >> response;
+  response = char(toupper(response));
+
+  if (response == 'Y') {
+    removeIngredientFromShoppingList();
+  } 
 }
 
 void KitchNMain::clearShoppingListConsoleWrapper() {
