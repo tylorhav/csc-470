@@ -36,8 +36,9 @@ void KitchNMain::loadSampleData() {
   Recipe* rec = new Recipe(title, prepTime, cookTime, myIngredients, mySteps, cuisineType);
   addRecipe(rec);
 
-  
   // Ingredients
+  string name;
+  string expDate;
 
 
   // Shopping List
@@ -120,7 +121,22 @@ Ingredient* KitchNMain::getIngredientByName(string name) {
 }
 
 void KitchNMain::addIngredient(Ingredient ingredient) {
-  
+  string name;
+
+  cout << "Add Ingredient to Inventory" << endl;
+  cout << endl;
+  cout << "Name: ";
+  getline(cin, name);
+
+  cout << "You entered " << name << endl;
+
+  cout << "0->Enter to exit";
+  char temp;
+  cin >> temp;
+
+  //for (auto &rec : results) {
+
+  //}
 }
 
 void KitchNMain::removeIngredient(string name) {
@@ -198,10 +214,11 @@ void KitchNMain::removeIngredientConsoleWrapper() {
 }
 
 void KitchNMain::getRecipesConsoleWrapper() {
+  clearScreen();
+
   int selection;
   int ctr = 1;
-
-  clearScreen();
+  
   cout << "View All Recipes" << endl;
   cout << endl;
   cout << "0) <--Back" << endl;
@@ -226,7 +243,11 @@ void KitchNMain::getRecipesConsoleWrapper() {
 
 void KitchNMain::getRecipesByTitleConsoleWrapper() {
   clearScreen();
-  cout << "in getRecipesByTitleConsoleWrapper()" << endl;
+
+  string searchTitle;
+  int selection;
+  int ctr = 1;
+
   // prompt recipe title
   // show #'d list of matching recipes
   // prompt recipe # to display
