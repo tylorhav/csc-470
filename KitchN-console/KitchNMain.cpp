@@ -198,13 +198,6 @@ void KitchNMain::addIngredientConsoleWrapper() {
   cout << "Quantity: ";
   cin >> qty;
 
-  // cout << "You entered " << name << endl;
-  // visual confirmation
-  cout << name << endl;
-  cout << "expires " << month << "/" << day << "/" << year << endl;
-  cout << "quantity: " << qty << endl;
-  cout << endl;
-
   // do we already have one or more of this ingredient on-hand?
   bool exists = false;
   int totalqty;
