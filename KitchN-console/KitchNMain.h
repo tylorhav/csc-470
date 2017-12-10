@@ -24,6 +24,8 @@ class KitchNMain {
   std::vector<Notification> notifications;
   
  public:
+  void loadSampleData();
+
   void checkForExpiredIngredients();
   void checkNotifications();
   
@@ -38,7 +40,7 @@ class KitchNMain {
 
   void addIngredient(Ingredient ingredient);
   void removeIngredient(std::string name);
-  void addRecipe(Recipe recipe);
+  void addRecipe(Recipe* recipe);
   void removeRecipe(std::string title);
   
   void getIngredientsConsoleWrapper();

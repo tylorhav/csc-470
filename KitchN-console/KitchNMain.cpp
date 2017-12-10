@@ -7,6 +7,43 @@
 
 using namespace std;
 
+void KitchNMain::loadSampleData() {
+
+  cout << "loading sample data, please wait..." << endl;
+
+  // Recipes
+  string title;
+  int prepTime;
+  int cookTime;
+  string cuisineType;
+  vector<RecipeIngredient> myIngredients;
+  vector<string> mySteps;
+
+
+  title = "Poppy Seed Chicken Salad";
+  prepTime = 5;
+  cookTime = 0;
+  cuisineType = "Salad";
+  myIngredients.emplace_back("2 cups", "Chicken Salad");
+  myIngredients.emplace_back("1/4 cup", "Poppy Seed Salad Dressing");
+  myIngredients.emplace_back("1/2 cup - roasted","Pecans");
+  myIngredients.emplace_back("1/2 cup - halved","Grapes");
+  myIngredients.emplace_back("1 package","pita chips");
+  mySteps.push_back("Combine first 4 ingredients in a bowl.");
+  mySteps.push_back("Cover and chill until ready to serve.");
+  mySteps.push_back("Serve with crackers or pita chips.");
+  //recipes.emplace_back(title, prepTime, cookTime, myIngredients, mySteps, cuisineType);
+  Recipe* rec = new Recipe(title, prepTime, cookTime, myIngredients, mySteps, cuisineType);
+  addRecipe(rec);
+
+  
+  // Ingredients
+
+
+  // Shopping List
+
+}
+
 void KitchNMain::clearScreen() {
   if(system("CLS")) system("clear");
 }
@@ -102,8 +139,8 @@ void KitchNMain::removeIngredient(string name) {
   }
 }
 
-void KitchNMain::addRecipe(Recipe recipe) {
-
+void KitchNMain::addRecipe(Recipe* recipe) {
+  recipes.push_back(*recipe);
 }
 
 void KitchNMain::removeRecipe(string title) {
@@ -161,13 +198,30 @@ void KitchNMain::removeIngredientConsoleWrapper() {
 }
 
 void KitchNMain::getRecipesConsoleWrapper() {
+  int selection;
+  int ctr = 1;
+
   clearScreen();
-  cout << "in getRecipesConsoleWrapper()" << endl;
+  cout << "View All Recipes" << endl;
+  cout << endl;
+  cout << "0) <--Back" << endl;
+  
+  vector<Recipe> results = getRecipes();
+  
   // display #'d list of recipes
+  for (auto &rec : results) {
+    cout << ctr << ") " << rec.getTitle() << endl;
+    ctr++;
+  }
+  
   // prompt # to view
-  //   - 0 back to main
-  //   - !=0 displayRecipe(string title) | getRecipesConsoleWrapper();
-  // 
+  cout << "Selection: ";
+  cin >> selection;
+  if (selection > 0) {
+    // display recipe
+    displayRecipe(results.at(selection - 1).getTitle());
+    getRecipesConsoleWrapper();
+  }
 }
 
 void KitchNMain::getRecipesByTitleConsoleWrapper() {
@@ -335,17 +389,24 @@ int KitchNMain::displayMenu() {
 }
 
 void KitchNMain::displayRecipe(string title) {
+  clearScreen();
+
   // show the recipe
+  cout << "Recipe Selected: " << title << endl;
+  
   // enter to continue
+  cout << "0->Enter to exit.";
+  char temp;
+  cin >> temp;
 }
 
 
 
 int main() {
 
-  printf("Welcome to KitchNMain\n");
-
   KitchNMain kmain;
+
+  kmain.loadSampleData();
 
   int menuResponse = 0;
   char temp;
