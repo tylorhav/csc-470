@@ -19,7 +19,8 @@ class Ingredient {
   void setName(std::string name);
   void setQuantity(int quantity);
   //void addExpirationDate(std::vector<Date> expirationDates);
-  void addExpirationDate(Date date);
+  //void addExpirationDate(Date date);
+  void addExpirationDate(int month, int day, int year);
 
   Ingredient( std::string name, int quantity, std::vector<Date> expirationDates);
   std::string getName();
