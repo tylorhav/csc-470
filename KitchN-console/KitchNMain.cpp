@@ -208,7 +208,7 @@ void KitchNMain::addIngredientConsoleWrapper() {
   // do we already have one or more of this ingredient on-hand?
   bool exists = false;
   for (auto &ing : ingredients) {
-    if (ing.getTitle() == name) {
+    if (ing.getName() == name) {
       exists = true;
       ing.setQuantity(ing.getQuantity() + qty);
       // create Date
