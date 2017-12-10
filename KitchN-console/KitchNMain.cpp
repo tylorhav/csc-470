@@ -37,7 +37,12 @@ void KitchNMain::loadSampleData() {
 
   // Ingredients
   string name;
-  string expDate;
+  string qty;
+
+  name = "Bread";
+  qty = 2;
+
+  
 
 
   // Shopping List
@@ -182,7 +187,6 @@ void KitchNMain::addIngredientConsoleWrapper() {
   
   // input:
   //  - name
-  //  - exp date
   //  - qty
   string name;
   int month, day, year, qty;
@@ -191,14 +195,6 @@ void KitchNMain::addIngredientConsoleWrapper() {
   cout << "Name: ";
   cin.ignore();
   getline(cin, name);
-  cout << endl;
-  cout << "Expiration date " << endl;
-  cout << "Month: ";
-  cin >> month;
-  cout << "Day: ";
-  cin >> day;
-  cout << "Year: ";
-  cin >> year;
   cout << endl;
   cout << "Quantity: ";
   cin >> qty;
@@ -211,9 +207,6 @@ void KitchNMain::addIngredientConsoleWrapper() {
       exists = true;
       ing.setQuantity(ing.getQuantity() + qty);
       totalqty = ing.getQuantity();
-      for (int a = 0; a < qty; a++) {
-        ing.addExpirationDate(month, day, year);
-      }
       break;
     }
   }
@@ -221,19 +214,12 @@ void KitchNMain::addIngredientConsoleWrapper() {
   if (exists) {
     //  confirmation
     cout << name << " already exists in inventory." << endl;
-    cout << "Added " << qty << " " << name << "(s) with expiration date of " << month << "/" << day << "/" << year << " to inventory." << endl;
+    cout << "Added " << qty << " " << name << "(s) to inventory." << endl;
     cout << "Total quantity is now " << totalqty << endl; 
   } else {
-    //    instantiate Ingredient
     //    add Ingredient to ingredients vector
-    vector<Date> expirationDates;
-    for (int a = 0; a < qty; a++) {
-      expirationDates.emplace_back(day, month, year);
-    }
-
-    ingredients.emplace_back(name, qty, expirationDates);
-    //    confirmation
-    cout << "Added " << qty << " " << name << "(s) with expiration date of " << month << "/" << day << "/" << year << " to inventory." << endl;
+    ingredients.emplace_back(name, qty);
+    cout << "Added " << qty << " " << name << "(s) to inventory." << endl;
 
   }
 
@@ -253,7 +239,7 @@ void KitchNMain::removeIngredientConsoleWrapper() {
   // display #'d list of ingredients
   // prompt # to remove
   // prompt qty  
-  // remove from inventory (assume oldest exp date for simplicity)
+  // remove from inventory
 }
 
 void KitchNMain::getRecipesConsoleWrapper() {
