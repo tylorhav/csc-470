@@ -1,4 +1,4 @@
 #!/bin/bash
 echo "compiling KitchNMain console application..."
-g++ KitchNMain.cpp Recipe.cpp Ingredient.cpp Notification.cpp RecipeIngredient.cpp -o run
+g++ -std=c++11 KitchNMain.cpp Recipe.cpp Ingredient.cpp Notification.cpp RecipeIngredient.cpp -o run 
 echo "done -> ./run to execute"
