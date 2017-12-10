@@ -120,22 +120,7 @@ Ingredient* KitchNMain::getIngredientByName(string name) {
 }
 
 void KitchNMain::addIngredient(Ingredient ingredient) {
-  string name;
-
-  cout << "Add Ingredient to Inventory" << endl;
-  cout << endl;
-  cout << "Name: ";
-  getline(cin, name);
-
-  cout << "You entered " << name << endl;
-
-  cout << "0->Enter to exit";
-  char temp;
-  cin >> temp;
-
-  //for (auto &rec : results) {
-
-  //}
+  
 }
 
 void KitchNMain::removeIngredient(string name) {
@@ -189,18 +174,69 @@ void KitchNMain::getIngredientsConsoleWrapper() {
 void KitchNMain::addIngredientConsoleWrapper() {
   clearScreen();
   cout << "in addIngredientConsoleWrapper()" << endl;
+  
   // input:
   //  - name
   //  - exp date
   //  - qty
+  string name;
+  int month, day, year, qty;
+  cout << "Add Ingredient to Inventory" << endl;
+  cout << endl;
+  cout << "Name: ";
+  cin.ignore();
+  getline(cin, name);
+  cout << endl;
+  cout << "Expiration date " << endl;
+  cout << "Month: ";
+  cin >> month;
+  cout << "Day: ";
+  cin >> day;
+  cout << "Year: ";
+  cin >> year;
+  cout << endl;
+  cout << "Quantity: ";
+  cin >> qty;
 
-  // instantiate ingredient
-  // add to ingredients vector
+  // cout << "You entered " << name << endl;
+  // visual confirmation
+  cout << name << endl;
+  cout << "expires " << month << "/" << day << "/" << year << endl;
+  cout << "quantity: " << qty << endl;
+  cout << endl;
 
-  // confirmation
-  // view ingredients list? 
-  //      y - getIngredientsConsoleWrapper() 
-  //      else proceed
+  // do we already have one or more of this ingredient on-hand?
+  bool exists = false;
+  for (auto &ing : ingredients) {
+    if (ing.getTitle() == name) {
+      exists = true;
+      ing.setQuantity(ing.getQuantity() + qty);
+      // create Date
+      for (int a = 0; a < qty; a++) {
+        // add expiration dates
+      }
+    }
+  }
+
+  // if yes
+  if (exists) {
+    //    add [qty] # of [exp date] to this ingredients exp date vector
+    //    add [qty] to current qty
+    //    confirmation
+  } else {
+    //    instantiate Ingredient
+    //    add Ingredient to ingredients vector
+    //    confirmation
+  }
+
+  char response;
+  cout << "Add another ingredient? (Y/n): ";
+  cin >> response;
+  response = char(toupper(response));
+
+  if (response == 'Y') {
+    addIngredientConsoleWrapper();
+  }
 }
 
 void KitchNMain::removeIngredientConsoleWrapper() {
