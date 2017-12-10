@@ -83,7 +83,18 @@ vector<Recipe> KitchNMain::getRecipes() {
 vector<Recipe> KitchNMain::getRecipesByTitle(string term) {
   vector<Recipe> results;
   for (unsigned int a = 0; a < recipes.size(); a++) {
-    if (recipes[a].getTitle().find(term) != std::string::npos) {
+    string title = recipes[a].getTitle();
+    for(auto& ch: title) {
+        ch = toupper(ch);
+    }
+
+    for(auto& ch: term) {
+        ch = toupper(ch);
+    }
+
+    
+    //if (recipes[a].getTitle().find(term) != std::string::npos) {
+    if (title.find(term) != std::string::npos) {
       results.push_back(recipes[a]);
     }
   }
@@ -307,8 +318,41 @@ void KitchNMain::getRecipesByTitleConsoleWrapper() {
   clearScreen();
 
   string searchTitle;
-  int selection;
-  int ctr = 1;
+  cout << "Enter title of recipe to search for: ";
+  cin.ignore();
+  getline(cin, searchTitle);
+
+  vector<Recipe> results = getRecipesByTitle(searchTitle);
+
+  if (results.size() == 0) {
+    cout << "No results matching '" << searchTitle << "'!" << endl;
+  }
+  else {
+
+    cout << "0) Back" << endl;
+    int ctr = 1;
+    for (auto &rec : results) {
+      cout << ctr << ") " << rec.getTitle() << endl;
+      ctr++;
+    }
+
+    int numToDisplay;
+    cout << "Select a recipe #: ";
+    cin >> numToDisplay;
+
+    if (numToDisplay != 0) {
+      displayRecipe(results.at(numToDisplay - 1).getTitle());
+    }
+  }
+  
+  char response;
+  cout << "Search for another recipe? (Y/n): ";
+  cin >> response;
+  response = char(toupper(response));
+
+  if (response == 'Y') {
+    getRecipesByTitleConsoleWrapper();
+  }
 
   // prompt recipe title
   // show #'d list of matching recipes
