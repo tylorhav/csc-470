@@ -161,12 +161,17 @@ void KitchNMain::removeRecipe(string title) {
 
 void KitchNMain::getIngredientsConsoleWrapper() {
   clearScreen();
-  cout << "in getIngredientsConsoleWrapper()" << endl;
-  
+   
   // display list of all ingredients on hand
+  int ctr = 1;
   std::vector<Ingredient> results = getIngredients();
+  for (auto &ing : results) {
+    cout << ctr << ") " << ing.getName() << endl;
+    ctr++;
+  }
 
   // enter to continue
+  cout << "0->Enter to continue.";
   char temp;
   cin >> temp;
 }
