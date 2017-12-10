@@ -36,17 +36,24 @@ void KitchNMain::loadSampleData() {
   addRecipe(rec);
 
   // Ingredients
-  string name;
-  string qty;
-
-  name = "Bread";
-  qty = 2;
-
+  ingredients.emplace_back("Bread", 2);
+  ingredients.emplace_back("Cereal", 5);
+  ingredients.emplace_back("Carrot", 10);
+  ingredients.emplace_back("Chicken Breast", 4);
+  ingredients.emplace_back("Tortillas", 50);
+  ingredients.emplace_back("Beer", 100);
+  ingredients.emplace_back("Tuna", 8);
   
-
-
   // Shopping List
-
+  shoppingList.addItem("Milk");
+  shoppingList.addItem("Peanut Butter");
+  shoppingList.addItem("Pasta");
+  shoppingList.addItem("Apple");
+  shoppingList.addItem("Steak");
+  shoppingList.addItem("Juice");
+  shoppingList.addItem("Ketchup");
+  shoppingList.addItem("Celery");
+  shoppingList.addItem("Lettuce");
 }
 
 void KitchNMain::clearScreen() {
@@ -166,7 +173,7 @@ void KitchNMain::removeRecipe(string title) {
 
 void KitchNMain::getIngredientsConsoleWrapper() {
   clearScreen();
-   
+  cout << "Kitchen Inventory:" << endl;
   // display list of all ingredients on hand
   int ctr = 1;
   std::vector<Ingredient> results = getIngredients();
@@ -176,7 +183,7 @@ void KitchNMain::getIngredientsConsoleWrapper() {
   }
 
   // enter to continue
-  cout << "0->Enter to continue.";
+  cout << "0->Enter to continue. ";
   char temp;
   cin >> temp;
 }
@@ -339,8 +346,18 @@ void KitchNMain::removeRecipeConsoleWrapper() {
 
 void KitchNMain::getShoppingListConsoleWrapper() {
   clearScreen();
-  cout << "in getShoppingListConsoleWrapper()" << endl;
+  cout << "Shopping List" << endl;
+
   // display current shopping list
+  for (auto &itemName : shoppingList.getItems()) {
+    cout << itemName << endl;
+  }
+  
+  cout << endl;
+  cout << "0->Enter to continue. ";
+
+  char temp;
+  cin >> temp;
   // enter to continue
 }
 
