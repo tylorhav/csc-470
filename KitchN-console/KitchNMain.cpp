@@ -242,11 +242,37 @@ void KitchNMain::addIngredientConsoleWrapper() {
 
 void KitchNMain::removeIngredientConsoleWrapper() {
   clearScreen();
-  cout << "in removeIngredientConsoleWrapper()" << endl;
+  cout << "Remove Ingredient From Inventory" << endl;
+  cout << endl;
+
+  cout << "0) Back" << endl;
+  
   // display #'d list of ingredients
+  int ctr = 1;
+  for (auto &ing : ingredients) {
+    cout << ctr << ") " << ing.getName() << endl;
+    ctr++;
+  }
+
   // prompt # to remove
-  // prompt qty  
-  // remove from inventory
+  int numToRemove;
+  cout << "Enter number of ingredient to remove: ";
+  cin >> numToRemove;
+
+  if (numToRemove != 0) {
+    string name = ingredients.at(numToRemove - 1).getName();
+    ingredients.erase(ingredients.begin() + (numToRemove - 1));
+    cout << "Removed " << name << " from kitchen inventory. " << endl;
+  }
+
+  char response;
+  cout << "Remove another ingredient? (Y/n): ";
+  cin >> response;
+  response = char(toupper(response));
+
+  if (response == 'Y') {
+    removeIngredientConsoleWrapper();
+  }
 }
 
 void KitchNMain::getRecipesConsoleWrapper() {
@@ -270,7 +296,7 @@ void KitchNMain::getRecipesConsoleWrapper() {
   // prompt # to view
   cout << "Selection: ";
   cin >> selection;
-  if (selection > 0) {
+  if (selection != 0) {
     // display recipe
     displayRecipe(results.at(selection - 1).getTitle());
     getRecipesConsoleWrapper();
@@ -416,7 +442,7 @@ void KitchNMain::removeIngredientFromShoppingList() {
   cout << "Enter # of item to remove: ";
   cin >> numToRemove;
 
-  if (numToRemove > 0) {
+  if (numToRemove != 0) {
     string name = shoppingList.getItems().at(numToRemove - 1);
     shoppingList.removeItem(name);
     cout << "Removed " << name << " from shopping list." << endl;
