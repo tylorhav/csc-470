@@ -532,10 +532,30 @@ void KitchNMain::displayRecipe(string title) {
   clearScreen();
 
   // show the recipe
-  cout << "Recipe Selected: " << title << endl;
-  
-  // enter to continue
-  cout << "0->Enter to exit.";
+  for (auto &rec : getRecipes()) {
+    if (rec.getTitle() == title) {
+      cout << rec.getTitle() << endl;
+      cout << "----------------------------------------------------" << endl;
+      cout << "Prep Time:   " << rec.getPrepTime() << " minutes" << endl;
+      cout << "Cook Time:   " << rec.getCookTime() << " minutes" << endl;
+      cout << "Recipe Type: " << rec.getCuisineType() << endl;
+      cout << endl;
+      cout << "Ingredients: " << endl;
+      for (auto &recIng : rec.getIngredientsList()) {
+        cout << recIng.getMeasurement() << " " << recIng.getName() << endl;
+      }
+      cout << endl;
+      cout << "Steps:" << endl;
+      int ctr = 1;
+      for (auto &step : rec.getSteps()) {
+        cout << ctr << ". " << step << endl;
+        ctr++;
+      }
+      break;
+    }
+  }
+  cout << endl;
+  cout << "0->Enter to continue. ";
   char temp;
   cin >> temp;
 }
