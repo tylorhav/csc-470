@@ -13,12 +13,11 @@
 #include "Recipe.h"
 #include "Notification.h"
 
-class ShoppingList;
+
 
 class KitchNMain {
 
  private:
-  ShoppingList shoppingList;
   std::vector<Ingredient> ingredients;
   std::vector<Recipe> recipes;
   std::vector<Notification> notifications;
@@ -35,7 +34,6 @@ class KitchNMain {
   Ingredient* getIngredientByName(std::string name);
   void removeIngredient(std::string name);
   void removeRecipe(std::string title);
-  int main();
 
 };
 

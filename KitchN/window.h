@@ -2,6 +2,8 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <Recipe.h>
+#include <vector>
 #include <QtCore>
 #include <QtGui>
 
@@ -50,6 +52,7 @@ private:
     void testFillRecipe();
     void testFillInventory();
     void testFillShopping();
+    void testRealRecipeList();
     
     QSize *largeList; //Shared between Inventory and Shopping lists
 
@@ -101,6 +104,8 @@ private:
     QTextEdit *newRecipeStepsInput;
     QSpinBox *newRecipePrepInput;
     QSpinBox *newRecipeCookInput;
+    QListWidget *newRecipeIngredientList;
+    QPushButton *newRecipeAddIngredient;
     
 //components of createCommonLabels
     QLabel* recipeTitleLabel;
@@ -124,6 +129,9 @@ private:
     QPushButton *cancelNewShopping;
     QGridLayout *shoppingPopupLayout;
     QLineEdit *newShoppingNameInput;
+    
+//test recipe list stuff
+    std::vector<Recipe> recipeTestList;
 
 
 

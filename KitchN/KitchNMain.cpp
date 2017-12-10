@@ -107,9 +107,3 @@ void KitchNMain::removeRecipe(string title) {
   }
 }
 
-int main() {
-
-  printf("Welcome to KitchNMain\n");
-
-  return 0;
-}

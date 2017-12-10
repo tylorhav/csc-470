@@ -3,8 +3,12 @@
 #include <QtCore>
 #include <QtGui>
 #include <string>
+#include <iostream>
 
 #include "Includes.h"
+
+extern ShoppingList *ShoppingListObj;
+extern KitchNMain *KitchnMainObj;
 
 Window::Window()
 {
@@ -13,7 +17,8 @@ Window::Window()
     createInventoryGroupBox();
     createShoppingGroupBox();
 
-    
+
+// these only fill the UI not the Database
 //    testFillRecipe();
 //    testFillInventory();
 //    testFillShopping();
@@ -81,7 +86,7 @@ void Window::cancelShoppingPopup()
 void Window::saveShoppingPopup()
 {
     std::string temp = (newShoppingNameInput->text()).toUtf8().constData();
-    ShoppingList::addItem(temp);//adds to database
+    ShoppingListObj->addItem(temp);//adds to database
     shoppingList->addItem(newShoppingNameInput->text());//adds to UI
     shoppingPopupWidget->close();
 }
@@ -121,7 +126,9 @@ void Window::cancelInventoryPopup()
 
 void Window::saveInventoryPopup()
 {
-    inventoryList->addItem(newInventoryNameInput->text());
+    //add to DB
+    
+    inventoryList->addItem(newInventoryNameInput->text());//adds to UI
     inventoryPopupWidget->close();
 }
 
@@ -171,8 +178,18 @@ void Window::cancelCreateRecipePopup()
 
 void Window::saveCreateRecipePopup()
 {
-    //This function needs to pass the information in the popup back to rest of program
+    //parse data from input to create a recipe to pass in to storage
+    std::string title = (newRecipeTitleInput->text()).toUtf8().constData();
+    int preptime = newRecipePrepInput->value();
+    int cooktime = newRecipeCookInput->value();
+    std::vector <std::string>steps;
+    steps.push_back((newRecipeStepsInput->toPlainText()).toUtf8().constData());
+    std::string cuisineType = (newRecipeCuisineTypeInput->text()).toUtf8().constData();
+    std::vector <RecipeIngredient>ingredientsList;
+    Recipe temp( title, preptime, cooktime, ingredientsList, steps, cuisineType);
+
     recipeList->addItem(newRecipeTitleInput->text()); //this adds it to the recipe list ONLY
+    recipeTestList.push_back(temp); //push back to local for testing in prod this passes it to real storage
     recipePopupWidget->close();
 }
     
@@ -309,17 +326,38 @@ void Window::createShoppingGroupBox()
     
     void Window::removeShoppingItem()
     {
-//        ShoppingList::removeItem(shoppingList->currentItem());
+    std::string temp = ((shoppingList->currentItem())->text()).toUtf8().constData();
+    ShoppingListObj->removeItem(temp);//removes from database
+    shoppingPopupWidget->close();//removes from UI
        delete (shoppingList->currentItem());
     }
 
-    void Window::displayRecipeOnClick()
-    {
+void Window::displayRecipeOnClick()
+{
 // This method will pass the name of the recipe out, and get in the recipe itself for display
 //Not Yet Implimented
 //        (recipeList->currentItem())->setBackground(Qt::green); //this is just example
+    std::string term = ((recipeList->currentItem())->text()).toUtf8().constData();
+    std::vector<Recipe> results;
+    std::string textConcat;
+    for (unsigned int a = 0; a < recipeTestList.size(); a++)
+    {
+        if (recipeTestList[a].getTitle().find(term) != std::string::npos)
+        {
+            textConcat += "Recipe Name: ";
+            textConcat += recipeTestList[a].getTitle();
+            textConcat += "\nCuisine Type: ";
+            textConcat += recipeTestList[a].getCuisineType();
+            textConcat += "\nPrep Time: ";
+            textConcat += std::to_string(recipeTestList[a].getPrepTime());
+            textConcat += "\nCook Time: ";
+            textConcat += std::to_string(recipeTestList[a].getCookTime());
+            recipeText->setPlainText(QString::fromStdString(textConcat));
+        }
     }
+//    recipeText->setPlainText((results.front()).getTitle());
     
+}
 
 
 //Reserved for testing functions*******************************************************
@@ -346,4 +384,10 @@ void Window::testFillShopping()
     {
         shoppingList->addItem("Shopping Item " + QString::number(i));
     }
+}
+
+void Window::testRealRecipeList()
+{
+//    recipeTestList = new std::vector<Recipe>;
+        
 }
