@@ -32,7 +32,6 @@ void KitchNMain::loadSampleData() {
   mySteps.push_back("Combine first 4 ingredients in a bowl.");
   mySteps.push_back("Cover and chill until ready to serve.");
   mySteps.push_back("Serve with crackers or pita chips.");
-  //recipes.emplace_back(title, prepTime, cookTime, myIngredients, mySteps, cuisineType);
   Recipe* rec = new Recipe(title, prepTime, cookTime, myIngredients, mySteps, cuisineType);
   addRecipe(rec);
 
