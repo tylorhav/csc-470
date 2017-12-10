@@ -31,6 +31,7 @@ void Ingredient::setQuantity(int quantity) {
   this->quantity = quantity;
 }
 
-void Ingredient::addExpirationDate(vector<Date> expirationDates) {
-  this->expirationDates = expirationDates;
+void Ingredient::addExpirationDate(Date date) {
+  //this->expirationDates = expirationDates;
+	this->expirationDates.push_back(date);
 }
