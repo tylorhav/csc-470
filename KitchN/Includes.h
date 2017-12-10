@@ -11,5 +11,6 @@
 #include "RecipeIngredient.h"
 #include "ShoppingList.h"
 #include "window.h"
+#include "main.h"
 
 #endif
