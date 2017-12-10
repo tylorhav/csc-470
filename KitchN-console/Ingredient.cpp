@@ -3,7 +3,6 @@
 #include "Includes.h"
 
 using std::string;
-using std::vector;
 
 Ingredient::Ingredient(string name, int quantity) {
   this->name = name;
