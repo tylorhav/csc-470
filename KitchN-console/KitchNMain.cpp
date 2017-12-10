@@ -408,8 +408,8 @@ int KitchNMain::displayMenu() {
   
   // checkNotifications()
 
-  cout << "  You currently have X items on your shopping list" << endl;
-  cout << "  You currently have X items in your kitch inventory" << endl;
+  cout << "  You currently have " << shoppingList.getItems().size() << " items on your shopping list" << endl;
+  cout << "  You currently have " << ingredients.size() << " items in your kitchen inventory" << endl;
   cout << endl;
   cout << endl;
   cout << "  --+ MAIN MENU +--" << endl;
