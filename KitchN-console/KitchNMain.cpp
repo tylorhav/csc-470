@@ -207,26 +207,36 @@ void KitchNMain::addIngredientConsoleWrapper() {
 
   // do we already have one or more of this ingredient on-hand?
   bool exists = false;
+  int totalqty;
   for (auto &ing : ingredients) {
     if (ing.getName() == name) {
       exists = true;
       ing.setQuantity(ing.getQuantity() + qty);
-      // create Date
+      totalqty = ing.getQuantity();
       for (int a = 0; a < qty; a++) {
-        // add expiration dates
+        ing.addExpirationDate(month, day, year);
       }
+      break;
     }
   }
 
-  // if yes
   if (exists) {
-    //    add [qty] # of [exp date] to this ingredients exp date vector
-    //    add [qty] to current qty
-    //    confirmation
+    //  confirmation
+    cout << name << " already exists in inventory." << endl;
+    cout << "Added " << qty << " " << name << "(s) with expiration date of " << month << "/" << day << "/" << year << " to inventory." << endl;
+    cout << "Total quantity is now " << totalqty << endl; 
   } else {
     //    instantiate Ingredient
     //    add Ingredient to ingredients vector
+    vector<Date> expirationDates;
+    for (int a = 0; a < qty; a++) {
+      expirationDates.emplace_back(day, month, year);
+    }
+
+    ingredients.emplace_back(name, qty, expirationDates);
     //    confirmation
+    cout << "Added " << qty << " " << name << "(s) with expiration date of " << month << "/" << day << "/" << year << " to inventory." << endl;
+
   }
 
   char response;
