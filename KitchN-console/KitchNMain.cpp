@@ -363,12 +363,39 @@ void KitchNMain::getShoppingListConsoleWrapper() {
 
 void KitchNMain::addIngredientToShoppingList() {
   clearScreen();
-  cout << "in addIngredientToShoppingList()" << endl;
-  // display #'d list of ingredients
-  // prompt for # of ingredient
-  // add ingredient to shopping list
-  // confirmation
-  // enter to continue
+  string itemName;
+
+  cout << "Add Ingredient to Shopping List" << endl;
+  cout << endl;
+
+  // prompt for item name
+  cout << "Name of item to add: ";
+  cin.ignore();
+  getline(cin, itemName);
+
+  // check if item is already on shopping list
+  bool exists = false;
+  for (auto &item : shoppingList.getItems()) {
+    if (item == itemName) {
+      exists = true;
+    }
+  }
+
+  if (!exists) {
+    shoppingList.addItem(itemName); // if not on list, add it
+  }
+  else {
+    cout << itemName << " is already on your shopping list!" << endl;
+  }
+
+  char response;
+  cout << "Add another item? (Y/n): ";
+  cin >> response;
+  response = char(toupper(response));
+
+  if (response == 'Y') {
+    addIngredientToShoppingList();
+  }
 }
 
 void KitchNMain::removeIngredientFromShoppingList() {
